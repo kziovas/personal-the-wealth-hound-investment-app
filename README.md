@@ -46,12 +46,12 @@ Stay on top of performance, news, and new opportunities with smart agents that w
    pip install -r requirements.txt
    ```
 
-4. Run the app:
-5. ```bash
+3. Run the app:
+   ```bash
    streamlit run beagle_investor_streamlit.py
    ```
 
-6. Open your browser at `http://localhost:8501`
+4. Open your browser at `http://localhost:8501`
 
  ---
 
