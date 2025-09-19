@@ -3,6 +3,7 @@ import streamlit as st
 from backend import portfolio_logic
 from backend.models import Asset
 from backend.news_logic import get_latest_news
+from views.layout import render_page_header
 
 
 def render(asset: Asset):
@@ -12,7 +13,7 @@ def render(asset: Asset):
     Parameters:
     - asset: Asset ORM object
     """
-    st.title(f"{asset.name} Details")
+    render_page_header(f"{asset.name} Details")
 
     # Fetch current price (cached)
     current_price = portfolio_logic.get_current_price(asset.name)

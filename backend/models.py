@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
@@ -45,8 +45,9 @@ class Portfolio(Base):
 
 class News(Base):
     __tablename__ = "news"
+
     id = Column(Integer, primary_key=True, index=True)
-    asset_id = Column(Integer, ForeignKey("asset.id"), nullable=False)
+    asset_id = Column(Integer, ForeignKey("assets.id"), nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
     content = Column(String, nullable=False)
 
@@ -62,10 +63,10 @@ class Asset(Base):
     invested_amount = Column(Float, nullable=False)
     invested_currency = Column(String, nullable=False)
     invested_price = Column(Float, nullable=False)
-    date_bought = Column(DateTime, default=datetime.datetime.utcnow)
+    date_bought = Column(DateTime, default=datetime.utcnow)
     note = Column(Text, nullable=True)  # optional notes about this asset
+
     news_items = relationship(
         "News", back_populates="asset", cascade="all, delete-orphan"
     )
-
     portfolio = relationship("Portfolio", back_populates="assets")

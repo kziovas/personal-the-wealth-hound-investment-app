@@ -1,5 +1,5 @@
 import logging
-from typing import Union
+from typing import List, Union
 
 import streamlit as st
 from yahoo_fin import stock_info
@@ -13,37 +13,34 @@ def get_current_price(symbol: str) -> float:
     """
     Fetch the current live price for a stock or cryptocurrency from Yahoo Finance.
 
-    This function uses the `yahoo_fin` library which is widely used in Python
-    for real-time price fetching. Prices are cached for 30 seconds to reduce
-    API calls and improve performance.
+    Prices are cached for 30 seconds to reduce API calls.
 
     Parameters:
-    - symbol (str): The ticker symbol (e.g., 'AAPL', 'BTC-USD').
+        symbol (str): Ticker symbol (e.g., 'AAPL', 'BTC-USD').
 
     Returns:
-    - float: Current price of the asset. Returns 0.0 if there is an error.
+        float: Current price. Returns 0.0 if an error occurs.
     """
     try:
-        # `get_live_price` returns a float-like value
         price: float = stock_info.get_live_price(symbol)
         logging.info(f"Fetched price for {symbol}: {price:.2f}")
         return float(price)
     except Exception as e:
         logging.error(f"Error fetching price for {symbol}: {e}")
-        st.error(f"Error fetching price for {symbol}")
         return 0.0
 
 
-def get_historical_prices(symbol: str, period: str = "1mo") -> Union[list, None]:
+@st.cache_data(ttl=3600)
+def get_historical_prices(symbol: str, period: str = "1mo") -> Union[List[float], None]:
     """
-    Fetch historical closing prices for a ticker from Yahoo Finance.
+    Fetch historical daily closing prices for a ticker from Yahoo Finance.
 
     Parameters:
-    - symbol (str): The ticker symbol.
-    - period (str): Time period for historical data (default: '1mo').
+        symbol (str): Ticker symbol.
+        period (str): Time period (default: '1mo').
 
     Returns:
-    - List of floats with closing prices, or None on error.
+        List[float] or None: Closing prices or None if error occurs.
     """
     try:
         df = stock_info.get_data(symbol, interval="1d", start_date=None, end_date=None)

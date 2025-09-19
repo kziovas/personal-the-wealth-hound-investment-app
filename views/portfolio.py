@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from backend import portfolio_logic
 from backend.models import Asset, Portfolio, User
+from views.layout import render_page_header
 
 
 def render(db: Session):
@@ -10,7 +11,7 @@ def render(db: Session):
     Render the portfolio page with asset list, add/delete functionality,
     and display total portfolio profit/loss.
     """
-    st.title("Portfolio")
+    render_page_header("Portfolio")
 
     if "user_id" not in st.session_state:
         st.warning("Please login first!")
