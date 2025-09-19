@@ -21,16 +21,13 @@ Stay on top of performance, news, and new opportunities with smart agents that w
   Runs three times daily (morning, midday, evening) and collects the latest news and analyst updates for your portfolio holdings. News is stored so you can review past updates per asset.  
 
 - **Discovery Agent** 🔎  
-  Suggests similar, fundamentally solid companies (not hype stocks) from different market segments, tailored to your portfolio.  
+  Suggests similar, fundamentally solid companies from different market segments, tailored to your portfolio.  
 
 - **Persistent Storage**  
-  Uses SQLite for a lightweight, self-contained database to ensure your data and news aren’t lost when the app closes.  
+  Uses SQLite for a lightweight, self-contained database.
 
 - **Modern UI**  
   Clean and simple Streamlit interface for an easy and intuitive experience.  
-
-- **Custom Icon** 🐕💼  
-  A minimalist beagle with sunglasses and a dollar-sign tie represents your financial hound.  
 
 ---
 
